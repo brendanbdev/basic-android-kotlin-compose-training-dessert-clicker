@@ -63,12 +63,27 @@ import com.example.dessertclicker.ui.theme.DessertClickerTheme
 import com.example.dessertclicker.model.Dessert
 
 // tag for logging
+/*
+To mark it as a compile-time constant, use "const" when declaring the variable.
+A compile-time constant is a value that is known during compilation.
+*/
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        /*
+        When you override the onCreate() method, you must call the
+        superclass implementation to complete the creation of the Activity,
+        so within it, you must immediately call super.onCreate(). The same is
+        true for other lifecycle callback methods.
+        */
         super.onCreate(savedInstanceState)
+        /*
+         Log.v() logs verbose messages. Log.d() method writes a debug message.
+         Other methods in the Log class include Log.i() for informational
+         messages, Log.w() for warnings, and Log.e() for error messages.
+        */
         Log.d(TAG, "onCreate Called")
         setContent {
             DessertClickerTheme {
@@ -157,6 +172,20 @@ private fun shareSoldDessertsInformation(intentContext: Context, dessertsSold: I
     }
 }
 
+/*
+To indicate to Compose that it should track an object's state, the object
+needs to be of type State or MutableState:
+
+State: Type that is immutable and can only be read.
+MutableState: Type that is mutable and allows reads and writes.
+*/
+/*
+remember: If a value is declared with "remember", Compose tracks its changes
+(saves during recomposition) and does a recomposition of all composable
+functions that read this value.
+rememberSavable: Like "remember", but tells Compose to retain the state during
+a configuration change (destroying and recreating the activity).
+*/
 @Composable
 private fun DessertClickerApp(
     desserts: List<Dessert>
